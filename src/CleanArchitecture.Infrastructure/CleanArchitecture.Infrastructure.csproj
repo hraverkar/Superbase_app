@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<!--#if (AuthoringMode)-->
+	<PropertyGroup>
+		<!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
+		<DefineConstants>$(DefineConstants);UseSqlServer</DefineConstants>
+		<!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+		<UseSqlServer>true</UseSqlServer>
+	</PropertyGroup>
+	<!--#endif-->
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!--#if (UseSqlServer)-->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="8.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+		<!--#else-->
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+		<!--#endif-->
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CleanArchitecture.Application\CleanArchitecture.Application.csproj" />
+	</ItemGroup>
+
+</Project>
